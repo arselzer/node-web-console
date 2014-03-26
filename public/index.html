@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>Realtime Node Repl</title>
+  <title>Realtime Node Console</title>
   <script src="/bower_components/socket.io-client/dist/socket.io.min.js"></script>
   <script src="/bower_components/ace-builds/src-min/ace.js"></script>
   <script defer src="/js/app.js"></script>
@@ -13,7 +13,7 @@
     <h1>Input</h1>
   	<div class="input" id="jsinput"></div>
     <button id="submitjs" class="submit-js btn btn-primary">Send</button>
-   	
+   	<div id="error" class="error alert alert-danger"></div>
     <h1>Output</h1>
     <pre class="input" id="jsoutput"></pre>
   </div>

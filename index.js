@@ -1,15 +1,11 @@
 var vm = require("vm");
-var util = require("util");
+var path = require("path");
+var os = require("os");
+var url = require("url");
+
+var vmConsole = require("./lib/vconsole");
 
 var io = require("socket.io").listen(8767);
-
-function vmConsole() {
-  this.output = "";
-}
-
-vmConsole.prototype.log = function() {
-  this.output += util.format.apply(this, arguments) + "\n";
-}
 
 io.sockets.on("connection", function(socket) {
   socket.on("js", function(data) {
@@ -17,9 +13,20 @@ io.sockets.on("connection", function(socket) {
     
     var context = vm.createContext({
     	"console": new vmConsole,
+      "path": path,
+      "Buffer": Buffer,
+      "os": os,
+      "url": url
     });
     
-    vm.runInContext(data, context);
+    try {
+    	vm.runInContext(data, context);
+    }
+		catch (err) {
+      // Errors shouldn't crash the server
+      console.log(err);
+      socket.emit("error", err.message);
+    }
     
     socket.emit("output", context.console.output);
   });

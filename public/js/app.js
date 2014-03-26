@@ -20,3 +20,14 @@ submitJs.addEventListener("click", function(e) {
 socket.on("output", function(data) {
   jsOutput.innerHTML = data;
 });
+
+socket.on("error", function(data) {
+  console.log("Error:", data);
+  var error = document.getElementById("error");
+  error.style.display = "block";
+  error.innerHTML = data;
+  
+  setTimeout(function() {
+    error.style.display = "none";
+  }, 6000);
+});
