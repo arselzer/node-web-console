@@ -2,6 +2,8 @@
 <html>
 <head>
   <title>Realtime Node Console</title>
+  <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bower_components/socket.io-client/dist/socket.io.min.js"></script>
   <script src="/bower_components/ace-builds/src-min/ace.js"></script>
   <script defer src="/js/app.js"></script>
@@ -10,12 +12,40 @@
 
 <body>
   <div class="container">
-    <h1>Input</h1>
-  	<div class="input" id="jsinput"></div>
-    <button id="submitjs" class="submit-js btn btn-primary">Send</button>
-   	<div id="error" class="error alert alert-danger"></div>
-    <h1>Output</h1>
-    <pre class="input" id="jsoutput"></pre>
+    <div class="row globals">
+      <h1>Globals</h1>
+      <table class="table requires">
+        <tr>
+          <th>global name</th>
+          <th>require(name)</th>
+        </tr>
+      </table>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group">
+            <div class="input-group-addon">name</div>
+            <input type="text" class="form-control name-input" placeholder="...">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group">
+            <div class="input-group-addon">origin</div>
+            <input type="text" class="form-control require-input" placeholder="...">
+          </div>
+        </div>
+      </div>
+      <button id="addrequire" class="add-require btn btn-primary">Add global</button>
+    </div>
+    <div class="row input">
+      <h1>Input</h1>
+      <div class="input" id="jsinput"></div>
+      <button id="submitjs" class="submit-js btn btn-primary">Send</button>
+      <div id="error" class="error alert alert-danger"></div>
+    </div>
+    <div class="row output">
+      <h1>Output</h1>
+      <pre id="jsoutput"></pre>
+    </div>
   </div>
 <script>
 	var editor = ace.edit("jsinput");

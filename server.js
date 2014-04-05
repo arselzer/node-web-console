@@ -1,8 +1,11 @@
-var connect = require("connect");
+module.exports = function() {
 
-var app = connect();
+  var connect = require("connect");
 
-app.use(connect.static(__dirname + "/public"));
+  var app = connect();
 
-app.listen(8676);
-console.log("Listening on port 8676");
+  app.use(connect.static(__dirname + "/public"));
+
+  app.listen(8676);
+  console.log("Listening on port 8676");
+}

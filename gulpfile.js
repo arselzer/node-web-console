@@ -22,7 +22,7 @@ gulp.task("lint-js", function() {
 
 gulp.task("watch", function() {
   gulp.watch(lessFiles, ["compile-less"]);
-  gulp.watch(jsFiles, ["lint"]);
+  gulp.watch(jsFiles, ["lint-js"]);
 });
 
 gulp.task("default", ["lint-js", "compile-less"]);
